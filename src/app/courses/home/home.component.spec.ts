@@ -26,6 +26,9 @@ describe('HomeComponent', () => {
   const beginnerCourses = setupCourses().filter(course => course.category === 'BEGINNER');
   const advancedCourses = setupCourses().filter(course => course.category === 'ADVANCED');
 
+  // fakeAsync when there are no http calls to fetch either external HTML or CSS
+  // async is rarely used
+  // beforeEach(fakeAsync(() => {
   beforeEach(waitForAsync(() => {
 
     const coursesServiceSpy = jasmine.createSpyObj('CoursesService', ['findAllCourses']);
@@ -41,6 +44,7 @@ describe('HomeComponent', () => {
       el = fixture.debugElement;
       coursesService = TestBed.inject(CoursesService);
     });
+    // flushMicrotasks();
   }));
 
   it("should create the component", () => {
